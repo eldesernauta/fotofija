@@ -1,0 +1,157 @@
+@import url(https://db.onlinewebfonts.com/c/07462b948887988e941382f1180ade8e?family=Covik+Sans);
+
+
+body {
+    @apply m-0 p-0 overflow-hidden
+}
+
+* {
+    caret-color: transparent;
+}
+
+::selection {
+    text-shadow: -1px 1px 0 #b37dff,
+        1px 1px 0 #76f7ae,
+        1px -1px 0 #ffe959,
+        -1px -1px 0 #ff5454;
+}
+
+@font-face {
+    font-family: "Covik Sans";
+    src: url("https://db.onlinewebfonts.com/t/07462b948887988e941382f1180ade8e.eot");
+    src: url("https://db.onlinewebfonts.com/t/07462b948887988e941382f1180ade8e.eot?#iefix")format("embedded-opentype"),
+        url("https://db.onlinewebfonts.com/t/07462b948887988e941382f1180ade8e.woff2")format("woff2"),
+        url("https://db.onlinewebfonts.com/t/07462b948887988e941382f1180ade8e.woff")format("woff"),
+        url("https://db.onlinewebfonts.com/t/07462b948887988e941382f1180ade8e.ttf")format("truetype"),
+        url("https://db.onlinewebfonts.com/t/07462b948887988e941382f1180ade8e.svg#Covik Sans")format("svg");
+}
+
+@font-face {
+    font-family: Quizma;
+    src: url('./fonts/Quizma_Light_Demo.otf') format('opentype');
+}
+
+
+@font-face {
+    font-family: Soligant;
+    src: url("./fonts/Soligant.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Stravinsky;
+    font-weight: 200;
+    src: url("./fonts/Stravinsky_light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Stravinsky;
+    font-weight: 400;
+    src: url("./fonts/Stravinsky_regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Stravinsky;
+    font-weight: 800;
+    src: url("./fonts/Stravinsky_bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Mushy;
+    font-weight: 800;
+    src: url("./fonts/MushyScript-Cheese.ttf") format("truetyp");
+}
+
+@import 'tailwindcss/components';
+@import 'tailwindcss/base';
+@import 'tailwindcss/utilities';
+
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.loader h2:first-child,
+.loader h2:last-child,
+h1 {
+    font-family: 'Stravinsky' !important;
+}
+
+@layer components {
+
+    .cta {
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: inherit;
+    }
+
+    .cta span {
+        padding-bottom: 7px;
+        padding-right: 5px;
+    }
+
+    .cta svg {
+        transform: translateX(-8px);
+        transition: all 0.3s ease;
+        fill: currentColor;
+    }
+
+    /* Estado inicial para flechas */
+    .previous svg {
+        font-family: 'Quizma' !important;
+        transform: translateX(8px);
+        /* se inicia desplazada hacia la derecha */
+        transition: all 0.3s ease;
+    }
+
+    .next svg {
+        font-family: 'Quizma' !important;
+        transform: translateX(-8px);
+        /* se inicia desplazada hacia la izquierda */
+        transition: all 0.3s ease;
+    }
+
+    /* Hover: ambas flechas regresan a posición neutra */
+    .previous:hover svg,
+    .next:hover svg {
+        transform: translateX(0);
+    }
+
+
+    .hover-underline-animation {
+        position: relative;
+        padding-bottom: 5px;
+    }
+
+    .hover-underline-animation:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: currentColor;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    .next:hover .hover-underline-animation:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    .previous:hover .hover-underline-animation:after {
+        transform: scaleX(1);
+        transform-origin: bottom right;
+    }
+
+}
