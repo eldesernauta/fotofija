@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
     context: path.resolve(__dirname, 'src'),
     entry: './index.js',
     output: {
-      filename: 'europa/bundle.js',
+      filename: 'fotofija/bundle.js',
       path: path.resolve(__dirname, 'build'),
       publicPath: '/',
     },
@@ -40,15 +40,12 @@ module.exports = (env, argv) => {
           },
         },
         {
-          test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-          use: [{
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-              publicPath: '../fonts/'
-            }
-          }]
+          test: /\.(ttf|otf|eot|svg|woff2?)$/,
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[name][ext]',
+            publicPath: '/fotofija/fonts/',
+          }
         },
         {
           test: /\.css$/,
@@ -71,7 +68,7 @@ module.exports = (env, argv) => {
           test: /\.(jpe?g|png|ico|gif|svg)$/i,
           type: 'asset/resource',
           generator: {
-            filename: 'images/[name][ext]',
+            filename: 'images/[name].[hash][ext]',
           },
         },
       ],
@@ -83,8 +80,8 @@ module.exports = (env, argv) => {
         manifest: path.resolve(__dirname, 'public/manifest.json'),
       }),
       new MiniCssExtractPlugin({
-        filename: 'europa/[name].css',
-        chunkFilename: 'europa/[id].css',
+        filename: 'fotofija/[name].css',
+        chunkFilename: 'fotofija/[id].css',
       }),
     ],
     optimization: {
