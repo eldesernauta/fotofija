@@ -103,32 +103,24 @@ const Slider = ({ images }) => {
         return (
           <div
             key={idx}
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ${
+            className={`pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ${
               isActive ? "opacity-100" : "opacity-0"
             } z-30`}
           >
-            <div className="relative w-auto h-auto">
-              <img
-                src={src}
-                alt={`slide-${idx}`}
-                ref={(el) => (imagesRef.current[idx] = el)}
-                onLoad={(e) => handleImageLoad(e, idx)}
-                className="max-h-[calc(100vh-9rem)] max-w-[calc(100vw-20px)] object-contain"
-              />
-
-              {/* Icons */}
+            {/* Icons */}
               {isActive && (cameraType.isFilm || cameraType.isMediumFormat) && (
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 flex flex-col gap-2 items-end pr-1 z-[99999]">
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 flex flex-col gap-2 items-end pr-1 z-[9999] pointer-events-auto">
                   {cameraType.isFilm && (
                     <Tooltip
                       content="Foto análoga"
-                      placement="bottom"
-                      className="bg-[#B37DFF] px-8 py-4 rounded-md z-[99999]"
+                      placement="top"
+                      className="bg-[#B37DFF] px-8 py-4 rounded-md z-[99999] pointer-events-auto"
                       showArrow
                     >
                       <img
                         src={filmIcon}
                         alt="film icon"
+                        title="Foto análoga"
                         className="w-6 lg:w-10 pointer-events-auto"
                       />
                     </Tooltip>
@@ -137,18 +129,29 @@ const Slider = ({ images }) => {
                     <Tooltip
                       content="Medio formato"
                       placement="bottom"
-                      className="bg-[#FFE959] px-8 py-4 rounded-md z-[99999]"
+                      className="bg-[#FFE959] px-8 py-4 rounded-md z-[99999] pointer-events-auto"
                       showArrow
                     >
                       <img
                         src={mfIcon}
                         alt="medio formato icon"
+                        title="Foto medio formato"
                         className="w-6 lg:w-10 pointer-events-auto"
                       />
                     </Tooltip>
                   )}
                 </div>
               )}
+            <div className="relative w-auto h-auto pointer-events-none">
+              
+
+              <img
+                src={src}
+                alt={`slide-${idx}`}
+                ref={(el) => (imagesRef.current[idx] = el)}
+                onLoad={(e) => handleImageLoad(e, idx)}
+                className="max-h-[calc(100vh-9rem)] max-w-[calc(100vw-20px)] object-contain pointer-events-none"
+              />
             </div>
           </div>
         );

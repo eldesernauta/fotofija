@@ -3,12 +3,9 @@ import { gsap } from "gsap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
-const DarkModeButton = () => {
+const DarkModeToggleSwitch = () => {
   const [theme, setTheme] = useState("light");
-  const buttonRef = useRef(null);
-  const moonRef = useRef(null);
-  const sunRef = useRef(null);
-  const maskRef = useRef(null);
+  const knobRef = useRef(null);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -22,52 +19,27 @@ const DarkModeButton = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
 
-    const moon = moonRef.current;
-    const sun = sunRef.current;
-    const mask = maskRef.current;
-
-    gsap.to(moon, {
-      y: theme === "dark" ? "0" : "100%",
-      duration: 1,
-      ease: "back.out(1.7)",
-      onComplete: () => {
-        gsap.set(mask, { overflow: "hidden" });
-      },
-    });
-    gsap.to(sun, {
-      y: theme === "dark" ? "100%" : 0,
-      duration: 1,
-      ease: "back.out(1.7)",
-      onComplete: () => {
-        gsap.set(mask, { overflow: "hidden" });
-      },
+    // Deslizar el knob con GSAP
+    gsap.to(knobRef.current, {
+      x: newTheme === "dark" ? 30 : 0, // Ajusta la distancia según el tamaño
+      duration: 0.2,
+      ease: "bounce.out",
     });
   };
 
   return (
     <button
-      ref={buttonRef}
-      className="rounded-full w-4 h-4 absolute top-7 lg:top-8 left-3/4 lg:left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden"
       onClick={handleThemeSwitch}
+      className="absolute left-1/2 -translate-x-[50%] flex justify-center items-center w-16 h-8 bg-neutral-900 dark:bg-neutral-100 rounded-full px-1 cursor-pointer"
     >
-      <span
-        className={`text-neutral-500 ${theme === "dark" && "hidden"}`}
-        ref={moonRef}
-      >
-        <FontAwesomeIcon icon={faMoon} style={{ fontSize: 15 }} />
-      </span>
-      <span
-        className={`text-neutral-400 ${theme === "light" && "hidden"}`}
-        ref={sunRef}
-      >
-        <FontAwesomeIcon icon={faSun} style={{ fontSize: 15 }} />
-      </span>
+      <FontAwesomeIcon icon={faMoon} className="text-neutral-900 dark:text-neutral-900 w-4 h-4 z-10 p-2" />
+      <FontAwesomeIcon icon={faSun} className="text-neutral-100 dark:text-neutral-100 w-4 h-4 z-10 p-2" />
       <div
-        className="overflow-hidden absolute inset-0 rounded-full"
-        ref={maskRef}
+        ref={knobRef}
+        className="absolute left-1 top-1 w-6 h-6 bg-neutral-100 dark:bg-neutral-900 rounded-full shadow transition-transform"
       ></div>
     </button>
   );
 };
 
-export default DarkModeButton;
+export default DarkModeToggleSwitch;
