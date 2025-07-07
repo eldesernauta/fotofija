@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 
-import loader1 from "../../images/loader1.jpg";
-import loader2 from "../../images/loader2.jpg";
-import loader3 from "../../images/loader3.jpg";
-import loader4 from "../../images/loader4.jpg";
+import loading1 from "../../images/loader/loading1.jpg";
+import loading2 from "../../images/loader/loading2.jpg";
+import loading3 from "../../images/loader/loading3.jpg";
+import loading4 from "../../images/loader/loading4.jpg";
+import loading5 from "../../images/loader/loading5.jpg";
 
-const images = [loader1, loader2, loader3, loader4];
+const images = [loading1, loading2, loading3, loading4, loading5];
 
 const Loader = ({ onFinish }) => {
     const [currentImage, setCurrentImage] = useState(0);
