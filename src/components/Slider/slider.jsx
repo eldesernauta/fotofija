@@ -114,14 +114,14 @@ const Slider = ({ images }) => {
                     <Tooltip
                       content="Foto análoga"
                       placement="top"
-                      className="bg-[#B37DFF] px-8 py-4 rounded-md z-[99999] pointer-events-auto"
+                      className="bg-[#B37DFF] px-8 py-4 rounded-md z-[99999]"
                       showArrow
                     >
                       <img
                         src={filmIcon}
                         alt="film icon"
                         title="Foto análoga"
-                        className="w-6 lg:w-10 pointer-events-auto"
+                        className="w-6 lg:w-10 pointer-events-auto cursor-help"
                       />
                     </Tooltip>
                   )}
@@ -129,14 +129,14 @@ const Slider = ({ images }) => {
                     <Tooltip
                       content="Medio formato"
                       placement="bottom"
-                      className="bg-[#FFE959] px-8 py-4 rounded-md z-[99999] pointer-events-auto"
+                      className="bg-[#FFE959] px-8 py-4 rounded-md z-[99999]"
                       showArrow
                     >
                       <img
                         src={mfIcon}
                         alt="medio formato icon"
                         title="Foto medio formato"
-                        className="w-6 lg:w-10 pointer-events-auto"
+                        className="w-6 lg:w-10 pointer-events-auto cursor-help"
                       />
                     </Tooltip>
                   )}
