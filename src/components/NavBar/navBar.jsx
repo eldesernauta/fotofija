@@ -12,7 +12,6 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import DarkModeButton from "../DarkModeButton/darkModeButton";
-
 import NavbarButton from "./NavBarButton/navBarButton";
 
 const NavBar = ({ onCategoryChange, activeCategory }) => {
@@ -53,21 +52,37 @@ const NavBar = ({ onCategoryChange, activeCategory }) => {
   useEffect(() => {
     const menu = menuRef.current;
     gsap.set(menu, { x: "100%", ease: "circ.out" });
+  }, []);
+
+  // 👇 Nuevo efecto: cerrar menú si haces click fuera
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (showMenu && menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+        gsap.to(menuRef.current, {
+          x: "100%",
+          duration: 0.3,
+          ease: "circ.out",
+        });
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showMenu]);
 
   const handleCategoryClick = (category) => {
     onCategoryChange(category);
   };
 
-  const categories = ["Fijas", "Backstage",  "Retratos", "Más fotos"];
-
+  const categories = ["Fijas", "Backstage", "Retratos", "Más fotos"];
   const otherSites = [
     { name: "Portafolio web", url: "https://eldesernauta.com" },
   ];
 
   return (
-    <nav className=" relative w-full mx-auto pt-3 pb-0 md:mb-3 flex justify-between gap-3 md:gap-0 items-center text-white px-5 z-50">
-      <h1 className="text-3xl cursor-none lg:text-6xl text-neutral-900 dark:text-neutral-100  font-Soligant">
+    <nav className="relative w-full mx-auto pt-3 pb-0 md:mb-3 flex justify-between gap-3 md:gap-0 items-center text-white px-5 z-50">
+      <h1 className="text-3xl cursor-none lg:text-6xl text-neutral-900 dark:text-neutral-100 font-Soligant">
         Oscar Rojas
       </h1>
 
@@ -88,7 +103,7 @@ const NavBar = ({ onCategoryChange, activeCategory }) => {
           {categories.map((cat, index) => (
             <li
               key={index}
-              onClick={() => handleCategoryClick(cat)} // cat es un string, así que se pasa directo
+              onClick={() => handleCategoryClick(cat)}
               className={`mb-2 w-full cursor-pointer ${
                 activeCategory === cat
                   ? "text-neutral-900 dark:text-neutral-100 font-bold"
@@ -165,8 +180,7 @@ const NavBar = ({ onCategoryChange, activeCategory }) => {
               </a>
             </li>
           </ul>
-          <p className="text-xs text-center font-Covik text-neutral-900 dark:text-neutral-100 font-Covik">
-            {" "}
+          <p className="text-xs text-center font-Covik text-neutral-900 dark:text-neutral-100">
             {new Date().getFullYear()} <span>&copy;</span> eldesernauta
           </p>
         </div>
