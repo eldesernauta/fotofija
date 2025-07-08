@@ -30,7 +30,7 @@ const DarkModeToggleSwitch = () => {
   return (
     <button
       onClick={handleThemeSwitch}
-      className="absolute left-1/2 -translate-x-[50%] flex justify-center items-center w-16 h-8 bg-neutral-900 dark:bg-neutral-100 rounded-full px-1 cursor-pointer"
+      className="relative lg:absolute left-0 lg:left-1/2 translate-x-0 lg:-translate-x-[50%] flex justify-center items-center w-16 h-8 bg-neutral-900 dark:bg-neutral-100 rounded-full px-1 cursor-pointer"
     >
       <FontAwesomeIcon icon={faMoon} className="text-neutral-900 dark:text-neutral-900 w-4 h-4 z-10 p-2" />
       <FontAwesomeIcon icon={faSun} className="text-neutral-100 dark:text-neutral-100 w-4 h-4 z-10 p-2" />

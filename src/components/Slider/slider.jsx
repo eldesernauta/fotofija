@@ -108,43 +108,39 @@ const Slider = ({ images }) => {
             } z-30`}
           >
             {/* Icons */}
-              {isActive && (cameraType.isFilm || cameraType.isMediumFormat) && (
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 flex flex-col gap-2 items-end pr-1 z-[9999] pointer-events-auto">
-                  {cameraType.isFilm && (
-                    <Tooltip
-                      content="Foto análoga"
-                      placement="top"
-                      className="bg-[#B37DFF] px-8 py-4 rounded-md z-[99999]"
-                      showArrow
-                    >
-                      <img
-                        src={filmIcon}
-                        alt="film icon"
-                        title="Foto análoga"
-                        className="w-6 lg:w-10 pointer-events-auto cursor-help"
-                      />
-                    </Tooltip>
-                  )}
-                  {cameraType.isMediumFormat && (
-                    <Tooltip
-                      content="Medio formato"
-                      placement="bottom"
-                      className="bg-[#FFE959] px-8 py-4 rounded-md z-[99999]"
-                      showArrow
-                    >
-                      <img
-                        src={mfIcon}
-                        alt="medio formato icon"
-                        title="Foto medio formato"
-                        className="w-6 lg:w-10 pointer-events-auto cursor-help"
-                      />
-                    </Tooltip>
-                  )}
-                </div>
-              )}
+            {isActive && (cameraType.isFilm || cameraType.isMediumFormat) && (
+              <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 flex flex-col gap-2 items-end pr-1 z-[9999] pointer-events-auto">
+                {cameraType.isFilm && (
+                  <Tooltip
+                    content="Foto análoga"
+                    placement="top"
+                    className="bg-[#B37DFF] px-8 py-4 rounded-md z-[99999]"
+                    showArrow
+                  >
+                    <img
+                      src={filmIcon}
+                      alt="film icon"
+                      className="w-6 lg:w-10 pointer-events-auto cursor-help"
+                    />
+                  </Tooltip>
+                )}
+                {cameraType.isMediumFormat && (
+                  <Tooltip
+                    content="Medio formato"
+                    placement="bottom"
+                    className="bg-[#FFE959] px-8 py-4 rounded-md z-[99999]"
+                    showArrow
+                  >
+                    <img
+                      src={mfIcon}
+                      alt="medio formato icon"
+                      className="w-6 lg:w-10 pointer-events-auto cursor-help"
+                    />
+                  </Tooltip>
+                )}
+              </div>
+            )}
             <div className="relative w-auto h-auto pointer-events-none">
-              
-
               <img
                 src={src}
                 alt={`slide-${idx}`}
