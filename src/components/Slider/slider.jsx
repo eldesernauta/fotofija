@@ -6,11 +6,14 @@ const filmIcon = require("../../images/film.png");
 const mfIcon = require("../../images/mf.png");
 
 const Slider = ({ images }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [current, setCurrent] = useState(0);
   const [imageWidths, setImageWidths] = useState([]);
   const imagesRef = useRef([]);
   const containerRef = useRef(null);
   const touchStartX = useRef(null);
+
+  const isAnimating = useRef(false);
 
   const getCameraType = (src) => {
     const fileName = src.split("/").pop().toLowerCase();
@@ -21,21 +24,35 @@ const Slider = ({ images }) => {
   };
 
   const goTo = (index) => {
-    if (index === current || index < 0 || index >= images.length) return;
+    if (
+      isAnimating.current ||
+      index === current ||
+      index < 0 ||
+      index >= images.length
+    )
+      return;
 
-    gsap.to(imagesRef.current[current], {
-      autoAlpha: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    });
+    isAnimating.current = true;
+    setIsLoaded(false);
 
-    gsap.fromTo(
-      imagesRef.current[index],
-      { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.6, ease: "power3.inOut" }
-    );
-
-    setCurrent(index);
+    const img = new Image();
+    img.src = images[index];
+    img.onload = () => {
+      gsap.to(imagesRef.current[current], { autoAlpha: 0, duration: 0.6 });
+      gsap.fromTo(
+        imagesRef.current[index],
+        { autoAlpha: 0 },
+        {
+          autoAlpha: 1,
+          duration: 0.6,
+          onComplete: () => {
+            setCurrent(index);
+            setIsLoaded(true);
+            isAnimating.current = false;
+          },
+        }
+      );
+    };
   };
 
   const next = () => goTo((current + 1) % images.length);
